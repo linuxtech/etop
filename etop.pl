@@ -23,8 +23,8 @@ $ua->timeout(10);
 my $SRVINFO;
 my $VALUES = {
         'search_q' => '$SRVINFO->{nodes}->{$srv}->{indices}->{search}->{query_total}',
-        'hostname' => '$SRVINFO->{nodes}->{$srv}->{name}'
-        ''
+        'hostname' => '$SRVINFO->{nodes}->{$srv}->{name}',
+        'doc_total'=> '$SRVINFO->{nodes}->{$srv}->{indices}->{docs}->{count}'
                 };
 
 my $win = Curses->new(); 
