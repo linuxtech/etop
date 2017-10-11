@@ -17,6 +17,8 @@ foreach (@ARGV){
 my $WANT_VAL = { 'search_q' => 1 };
 map({$WANT_VAL->{$_} = 1} split(/,/,$ARG->{get}));
 
+my $rr = defined $ARG->{refresh} ? $ARG->{refresh}+0 : 5; # Define refresh rate
+
 my $ua = LWP::UserAgent->new;
 $ua->timeout(10);
 
@@ -51,7 +53,7 @@ while(1){
                         if(defined $WANT_VAL->{$name}){
                                 my $value = eval($VALUES->{$name});
                                 my $delta = defined $prev->{$srv}->{$name} ? $value - $prev->{$srv}->{$name} : 0;
-                                $output .= "$name:$value Δ:$delta | ";
+                                $output .= "$name:$value dt:$delta | ";
                                 $prev->{$srv}->{$name} = $value;
                         }
                 }
@@ -60,7 +62,7 @@ while(1){
                 $row +=1;
         }
         $win->refresh();
-        sleep(5);
+        sleep($rr);
 }
 
 END:
