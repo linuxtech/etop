@@ -15,7 +15,7 @@ foreach (@ARGV){
 }
 
 my $WANT_VAL = { 'search_q' => 1 };
-map({$WANT_VAL->{$_} = 1} split($ARG->{get}));
+map({$WANT_VAL->{$_} = 1} split(/,/,$ARG->{get}));
 
 my $ua = LWP::UserAgent->new;
 $ua->timeout(10);
